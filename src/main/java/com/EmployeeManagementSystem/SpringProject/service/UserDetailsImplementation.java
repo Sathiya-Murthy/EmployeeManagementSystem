@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.SpringProject.security.service;
+package com.EmployeeManagementSystem.SpringProject.service;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,22 +12,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
-public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID = 1L;
-
+public class UserDetailsImplementation implements UserDetails {
     private Long id;
-
     private String username;
-
     private String email;
-
     @JsonIgnore
     private String password;
-
     private Collection<? extends GrantedAuthority> authorities;
-
-    public UserDetailsImpl(Long id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImplementation(Long id, String username, String email, String password,
+                                     Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -35,12 +28,12 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImplementation build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsImpl(
+        return new UserDetailsImplementation(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
@@ -97,7 +90,7 @@ public class UserDetailsImpl implements UserDetails {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        UserDetailsImpl user = (UserDetailsImpl) o;
+        UserDetailsImplementation user = (UserDetailsImplementation) o;
         return Objects.equals(id, user.id);
     }
 }

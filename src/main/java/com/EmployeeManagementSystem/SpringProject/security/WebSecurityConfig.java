@@ -1,8 +1,8 @@
 package com.EmployeeManagementSystem.SpringProject.security;
 
-import com.EmployeeManagementSystem.SpringProject.security.jwt.AuthEntryPointJwt;
-import com.EmployeeManagementSystem.SpringProject.security.jwt.AuthTokenFilter;
-import com.EmployeeManagementSystem.SpringProject.security.service.UserDetailsServiceImpl;
+import com.EmployeeManagementSystem.SpringProject.JWT.EntryPoint;
+import com.EmployeeManagementSystem.SpringProject.JWT.TokenFilter;
+import com.EmployeeManagementSystem.SpringProject.service.UserDetailsServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserDetailsServiceImplementation userDetailsService;
 
     @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private EntryPoint unauthorizedHandler;
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+    public TokenFilter authenticationJwtTokenFilter() {
+        return new TokenFilter();
     }
 
     @Override
